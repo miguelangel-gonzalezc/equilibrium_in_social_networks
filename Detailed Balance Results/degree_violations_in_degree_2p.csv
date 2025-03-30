@@ -1,0 +1,4 @@
+,degree_i,degree_j,wave,n_degrees_i,n_degrees_j,n_transitions_ij,n_transitions_ji,relative_error
+0,1,3,3,17.0,72.0,1.0,14.0,2.1584954900236353
+1,2,4,3,21.0,51.0,0.0,8.0,2.192883430315595
+2,2,5,4,59.0,60.0,7.0,0.0,2.152842984880315
