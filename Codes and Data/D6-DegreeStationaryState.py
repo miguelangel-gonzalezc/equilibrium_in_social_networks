@@ -122,3 +122,23 @@ for wave in tqdm(range(len(wave_numbers)-1)):
     stationary_degree_densities[wave] = densities
     eigenvalue_closest_to_1[wave] = np.real(eigenvalues[i])
         
+
+‘’’
+—CAVEAT—
+
+To replicate this analysis, it is important to consider a subtle detail. When certain states have a 
+very low probability of occurring (for example, links +2-2, or extremely high degrees), the transition 
+probabilities involving these rare states in the corresponding transition matrices are very difficult 
+to estimate reliably. This means that, in cases of extremely sparse statistics, we might observe only 
+a single link in the network that is in the +2-2 state, which remains unchanged in the next snapshot. 
+When calculating the transition probability from +2-2 to itself, since there was only one such link 
+and it did not change state, the resulting transition probability is 1. This leads to a problem: when 
+computing the expected stationary distribution (e.g., via the corresponding eigenvector of the transition matrix), 
+we observe abnormally high stationary values for this state, values that clearly do not reflect the 
+empirical distribution. A simple way to understand this is that, no matter how unlikely the +2-2 state 
+is, once a link enters it, the transition matrix imposes it cannot leave. Over time, this causes the 
+stationary distribution to accumulate weight in that state, which is a spurious effect caused by poor 
+statistical estimation due to insufficient sample size. For this reason, transitions involving these 
+extremely rare states with self-loops should be excluded to avoid distorting the long-term dynamics.
+
+‘’’
