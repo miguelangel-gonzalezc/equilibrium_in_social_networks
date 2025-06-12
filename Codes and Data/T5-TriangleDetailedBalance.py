@@ -121,7 +121,23 @@ for k in range(N):
                     
                     v+=1
             
+‘’’
+--COMMENT--
 
+The z-scores of the detailed balance violations in transitions between triangles are inflated. The intuition behind this 
+is the following: suppose we detect that the link-level transition from +0+0 to +2+2 violates detailed balance. When 
+measuring transitions between triangles, we will also observe that transitions such as +0+0+0+0+0+0 → +0+0+0+0+2+2 
+violate detailed balance. However, when computing the z-score for this triangle-level transition, we compare the observed 
+deviation to the width of the confidence interval. In these cases, the confidence interval is abnormally narrow. This is 
+because the triangle counts include many triangles that share the same individual link responsible for the detailed balance 
+violation. The intuition here is that there are far more triangles of type +0+0+0+0+0+0 or +0+0+0+0+2+2 than there are 
+individual links of type +0+0 or +2+2. Even if the number of violations is the same at the link level, triangles are counted 
+multiple times for the same violating link, artificially increasing the signal without increasing the effective sample size. 
+A more general conclusion from this observation is that the confidence intervals for triangle-level statistics are underestimated. 
+To correct this bias, it would be necessary to account for the network’s structure, specifically, the dependency between triangle 
+counts caused by overlapping links.
+
+‘’’
 
  
 
